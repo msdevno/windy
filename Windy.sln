@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windy", "Windy\Windy.csproj", "{0F16DB28-DB39-459D-97C5-1F8D4CAE235F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindySubscriber", "WindySubscriber\WindySubscriber.csproj", "{B6D820EA-841A-402F-A809-8990EEED900B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windy.Domain", "Windy.Domain\Windy.Domain.csproj", "{2CEAD3B6-6296-4C14-921E-462322DEF654}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{0F16DB28-DB39-459D-97C5-1F8D4CAE235F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F16DB28-DB39-459D-97C5-1F8D4CAE235F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F16DB28-DB39-459D-97C5-1F8D4CAE235F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D820EA-841A-402F-A809-8990EEED900B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D820EA-841A-402F-A809-8990EEED900B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D820EA-841A-402F-A809-8990EEED900B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D820EA-841A-402F-A809-8990EEED900B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CEAD3B6-6296-4C14-921E-462322DEF654}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CEAD3B6-6296-4C14-921E-462322DEF654}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CEAD3B6-6296-4C14-921E-462322DEF654}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CEAD3B6-6296-4C14-921E-462322DEF654}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

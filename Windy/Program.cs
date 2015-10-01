@@ -1,8 +1,10 @@
 ﻿using FizzWare.NBuilder;
 using Microsoft.ServiceBus.Messaging;
+using Newtonsoft.Json;
 using System;
-using System.Linq;
-using Windy.Entitities;
+using System.Text;
+using System.Threading;
+using Windy.Domain;
 
 namespace Windy
 {
@@ -11,30 +13,28 @@ namespace Windy
         static void Main(string[] args)
         {
             var randomGenerator = new RandomGenerator((int)DateTime.Now.Ticks);
-            var eventHubClient = EventHubClient.CreateFromConnectionString("Endpoint=sb://windypedro.servicebus.windows.net/;SharedAccessKeyName=PedrosTransmissionPolicy;SharedAccessKey=lAhSvgXwQFDGKqfMTcs9ptoMwwP2XnCAAbW5cjnBfP0=", "windmillseventhub");
-
+            var eventHubClient = EventHubClient.CreateFromConnectionString("Endpoint=sb://windypedro.servicebus.windows.net/;SharedAccessKeyName=sender;SharedAccessKey=sKzgqs3GDHd9kVForG4PFsMLHBUsK6Cc1Y9h1x+vIlg=", "windmillseventhub");
+            var consumerGroup  = eventHubClient.GetDefaultConsumerGroup();
             while (true)
             {
                 // Generate tons of Random data
-                var newWindmillSamples = Builder<WindmillData>
-                    .CreateListOfSize(32)
-                    .All()
+                var sample = Builder<WindmillData>
+                    .CreateNew()
                         .With(o => o.MillId = randomGenerator.Next(1, 800).ToString())
-                        .With(o => o.Client = "Bærum")
+                        .With(o => o.Client = "Asker")
                         .With(o => o.MegaWatt = randomGenerator.Next(0.01, 3.0))
-                    .Build().ToList();
+                    .Build();
 
+
+                var jsonObject = JsonConvert.SerializeObject(sample);
 
                 // post random data to Event Hub
-                var byteArrays = newWindmillSamples.Select(t => new EventData(WindmillData.AsByteArray(t)));
-                eventHubClient.SendBatch(byteArrays);
+                var eventData = new EventData(Encoding.UTF8.GetBytes(jsonObject));                
+                eventHubClient.Send(eventData);
+                Thread.Sleep(1000);
 
-                var first = newWindmillSamples.First();
-
-                Console.WriteLine($"Just sent data for Client: {first.Client}, Mill: {first.MillId}, Producing {first.MegaWatt} MW");
+                Console.WriteLine($"Just sent data for Client: {sample.Client}, Mill: {sample.MillId}, Producing {sample.MegaWatt} MW");
             }
-        
-
         }
     }
 }
