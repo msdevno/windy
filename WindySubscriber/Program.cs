@@ -7,9 +7,9 @@ namespace WindySubscriber
     {
         static void Main(string[] args)
         {
-            var storageConnectionString  = "DefaultEndpointsProtocol=https;AccountName=windystorage;AccountKey=anEPDluAymphAK0moL8lTljz3qtIHjKs68OpluD2Tzyt3vscWDgHBIFlVCCDxMVyzIsnwIMq0mIkwb5gAPW24w==";
-            var eventHubConnectionString = "Endpoint=sb://windypedro.servicebus.windows.net/;SharedAccessKeyName=reader;SharedAccessKey=TBp/IdCnmIF+YVia0WhDKRIVFvRYmaRNxF8WiYHFW5g=";
-            var eventHubPath             = "windmillseventhub";
+            var storageConnectionString  = "DefaultEndpointsProtocol=https;AccountName=windystorage;AccountKey=dVO07yiZaIDnh5tcE1OVjPm/vxwC9cTi5bF3JzuxlsbjWV8jObSF5qej9pvPredYveYPrBDw7gbkcIZ7NlvHEg==";
+            var eventHubConnectionString = "Endpoint=sb://windybus.servicebus.windows.net/;SharedAccessKeyName=listener;SharedAccessKey=IzCnCSJ7y5fYt1ZKdGKLFizWb/6wF1CszP8HdP9RPnE=";
+            var eventHubPath             = "windyeventhub";
             var consumerGroupName        = "windygroup";
             var hostname                 = "host_" + Guid.NewGuid().ToString();
 
