@@ -1,26 +1,28 @@
 ﻿using Microsoft.ServiceBus.Messaging;
 using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Windy.Domain;
-using Microsoft.WindowsAzure.Storage.Table;
+using Windy.Domain.Managers;
 
 namespace WindySubscriber
 {
     public class WindyEventProcessor : IEventProcessor
     {
+        private static WindyConfiguration _configuration = new WindyConfiguration();
+
         private PartitionContext _context;
         private CloudTable _ourTable;
 
         public WindyEventProcessor()
         {
-            var connectionstring = "DefaultEndpointsProtocol=https;AccountName=windystorage;AccountKey=dVO07yiZaIDnh5tcE1OVjPm/vxwC9cTi5bF3JzuxlsbjWV8jObSF5qej9pvPredYveYPrBDw7gbkcIZ7NlvHEg==";
+            var connectionstring    = _configuration["StorageConnectionString"]; 
             var cloudStorageAccount = CloudStorageAccount.Parse(connectionstring);
-            var tableClient = cloudStorageAccount.CreateCloudTableClient();
+            var tableClient         = cloudStorageAccount.CreateCloudTableClient();
 
             _ourTable = tableClient.GetTableReference("windytable");
 

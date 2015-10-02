@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Windy.Domain;
+using Windy.Domain.Managers;
 
 namespace Windy
 {
@@ -13,13 +14,16 @@ namespace Windy
     {
         static void Main(string[] args)
         {
-            int i = 0;
-            var randomGenerator = new RandomGenerator((int)DateTime.Now.Ticks);
-            var eventHubClient = EventHubClient.CreateFromConnectionString("Endpoint=sb://windybus.servicebus.windows.net/;SharedAccessKeyName=sender;SharedAccessKey=lUhEj3M9nQBlYRb7F5OuZPcG8AjQf9gSb3XTY2T4GIo=", "windyeventhub");
+            var configuration = new WindyConfiguration();
+            var eventHubClient = EventHubClient.CreateFromConnectionString(configuration["EventHubSenderConnectionString"], "windyeventhub");
             var consumerGroup  = eventHubClient.GetDefaultConsumerGroup();
+            var randomGenerator = new RandomGenerator((int)DateTime.Now.Ticks);
 
             var clients = new[] { "Alfa", "Beta", "Gamma", "Delta", "Etta" };
             var cities  = new[] { "Arendal", "Bergen","Bodø","Drammen","Egersund","Farsund","Flekkefjord ","Florø","Fredrikstad ","Gjøvik","Grimstad","Halden","Hamar","Hammerfest","Harstad","Haugesund","Holmestrand ","Horten","Hønefoss","Kongsberg","Kongsvinger ","Kristiansand","Kristiansund","Larvik","Lillehammer ","Mandal","Molde","Moss","Namsos","Narvik","Notodden","Oslo","Porsgrunn","Risør","Sandefjord  ","Sandnes","Sarpsborg","Skien","Stavanger","Steinkjer","Søgne","Tromsø","Trondheim","Tønsberg","Vadsø","Vardø","Vennesla","Ålesund"};
+
+
+            int messagesSent = 0;
             while (true)
             {
                 var allSamples = new List<WindmillData>();
@@ -44,8 +48,8 @@ namespace Windy
                 });
 
                 eventHubClient.SendBatch(allEventData);
-                Console.WriteLine($"{i} Samples...");
-                i += 100;              
+                Console.WriteLine($"{messagesSent} Samples...");
+                messagesSent += 100;              
             }
         }
     }
