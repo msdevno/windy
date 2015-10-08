@@ -9,14 +9,16 @@ namespace Windy.Domain
         [DataMember(Name ="sampletime", Order =10)]
         public DateTime SampleTime { get; set; }
 
-        [DataMember(Name = "megawatt", Order = 30)]
+        [DataMember(Name ="windmillid", Order = 20)]
+        public int  WindmillId { get; set; }
+
+        [DataMember(Name = "temperature_C", Order = 30)]
+        public double Temperature { get; set; }
+
+        [DataMember(Name = "windspeed_mps", Order = 40)]
+        public double WindSpeed{ get; set; }
+
+        [DataMember(Name = "megawatt", Order = 50)]
         public double MegaWatt { get; set; }
-
-        public bool IsValid()
-        {
-            if (MegaWatt < 0) return false;
-
-            return true;
-        }
     }
 }

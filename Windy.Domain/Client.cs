@@ -1,36 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Windy.Domain.Entities;
 
 namespace Windy.Domain
 {
     [DataContract(Name ="client")]
     public class Client
     {
+        [DataMember(Name ="id", Order = 5)]
+        public int Id { get; set; }
+
         [DataMember(Name ="name", Order = 10)]
         public string Name { get; set; }
 
-        [DataMember(Name = "mills", Order = 20)]
-        public IEnumerable<Mill> Mills { get; set; }
-
-        public double ProductionFactor { get; set; }
+        [DataMember(Name = "windmills", Order = 20)]
+        public List<Windmill> Windmills { get; set; }
 
         public IEnumerable<StreamAnalyticsFriendly> AsStreamAnalyticsFriendly()
         {
-            foreach(var mill in Mills)
+            foreach(var windmill in Windmills)
             {
-                foreach(var sample in mill.Samples)
+                yield return new StreamAnalyticsFriendly
                 {
-                    yield return new StreamAnalyticsFriendly
-                    {
-                        Name         = Name, 
-                        MillId       = mill.Id, 
-                        MillLocation = mill.Location.Name,
-                        SampleTime   = sample.SampleTime,
-                        Megawatt     = sample.MegaWatt
-                    };
-                }
-            }
+                    ClientName    = Name, 
+                    LocationName  = windmill.Location.Name, 
+                    Latitude      = windmill.Location.Latitude,
+                    Longitude     = windmill.Location.Longitude,
+                    SampleTime    = windmill.LastSample.SampleTime,
+                    Temperature_C = windmill.LastSample.Temperature,
+                    WindSpeeed_MS = windmill.LastSample.WindSpeed,
+                    Megawatt      = windmill.LastSample.MegaWatt
+                };
+            }            
         }
     }
 }

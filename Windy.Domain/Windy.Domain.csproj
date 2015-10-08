@@ -43,13 +43,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
-    <Compile Include="Location.cs" />
+    <Compile Include="Contracts\IWeatherCollector.cs" />
+    <Compile Include="Entities\Generator.cs" />
+    <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Yr\WeatherProxy.cs" />
     <Compile Include="Managers\WindyConfiguration.cs" />
-    <Compile Include="Mill.cs" />
+    <Compile Include="Entities\Windmill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamAnalyticsFriendly.cs" />
     <Compile Include="WindmillData.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
