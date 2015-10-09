@@ -40,6 +40,7 @@ namespace Windy.Domain.Entities
         {
             get
             {
+                yield return new Generator { Id = 4, Name = "Hitachi X800",  MaxOutputMw = 3.5, MinOuputMw = 0.15, MinOptimalWindspeed = 6.8, MaxOptimalWindspeed = 14.0, CutInSpeed = 2.0, };
                 yield return new Generator { Id = 1, Name = "Vestas V90",    MaxOutputMw = 2.0, MinOuputMw = 0.1,  MinOptimalWindspeed = 6.2, MaxOptimalWindspeed = 18.0, CutInSpeed = 3.5, };
                 yield return new Generator { Id = 2, Name = "Siemens SWT-6", MaxOutputMw = 5.0, MinOuputMw = 0.25, MinOptimalWindspeed = 7.0, MaxOptimalWindspeed = 14.0, CutInSpeed = 6.0, };
                 yield return new Generator { Id = 3, Name = "Enercon E126",  MaxOutputMw = 7.0, MinOuputMw = 0.3,  MinOptimalWindspeed = 8.2, MaxOptimalWindspeed = 18.0, CutInSpeed = 7.0, };
