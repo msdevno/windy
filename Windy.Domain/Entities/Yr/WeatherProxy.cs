@@ -27,7 +27,7 @@ namespace Windy.Domain.Entities.Yr
             }
             catch (Exception e)
             {
-
+                Console.WriteLine("Something went wrong: " + e.Message);
             }
             return null;
         }

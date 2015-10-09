@@ -15,9 +15,15 @@ namespace Windy
     {
         static void Main(string[] args)
         {
-            var configuration = new WindyConfiguration();
-            var eventHubClient = EventHubClient.CreateFromConnectionString(configuration["EventHubSenderConnectionString"], "windyeventhub");
-            var consumerGroup = eventHubClient.GetDefaultConsumerGroup();
+            var configuration            = new WindyConfiguration();
+            var eventhubConnectionString = configuration["EventHubSenderConnectionString"];
+            if(string.IsNullOrEmpty(eventhubConnectionString))
+            {
+                Console.WriteLine("Can't grab the connection string. Need to exit");
+                return;
+            }
+            var eventHubClient           = EventHubClient.CreateFromConnectionString(eventhubConnectionString, "windyeventhub");
+            var consumerGroup            = eventHubClient.GetDefaultConsumerGroup();
 
 
             var clients = CreateAndPopulateClientsList();
