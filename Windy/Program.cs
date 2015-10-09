@@ -32,12 +32,11 @@ namespace Windy
                     var utf8EncodedSample = Encoding.UTF8.GetBytes(json);
 
                     allEventData.Add(new EventData(utf8EncodedSample));
-                    Console.WriteLine($"[{client.Name}] Location: {sample.LocationName} WindSpeed: {sample.WindSpeeed_MS} m/s Produce: {sample.Megawatt} MW");
+                    Console.WriteLine($"[{client.Name}] Location: {sample.LocationName} WindSpeed: {sample.WindSpeeed_MS} m/s Produced {sample.Megawatt} MW");
                 }
             }
             eventHubClient.SendBatch(allEventData);
-            Console.WriteLine("Data transmitted");
-            Console.ReadKey();
+            Console.WriteLine($"Data transmitted {DateTime.Now.ToString("dd MMM yyyy HH:mm")}");            
         }
 
         private static List<Client> CreateAndPopulateClientsList()
