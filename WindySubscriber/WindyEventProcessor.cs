@@ -56,24 +56,22 @@ namespace WindySubscriber
                 var sampleData = JsonConvert.DeserializeObject<WindmillData>(rawString);
                 var time       = string.Format("{0:D19}", (DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks));
 
-                if (sampleData.IsValid())
-                {
-                    var dynamicTableEntity = new DynamicTableEntity(sampleData.Client, time);
-                    dynamicTableEntity.Properties.Add("Location", new EntityProperty(sampleData.Location));
-                    dynamicTableEntity.Properties.Add("MillId", new EntityProperty(sampleData.MillId));
-                    dynamicTableEntity.Properties.Add("Megawatt", new EntityProperty(sampleData.MegaWatt));
 
-                    var insertOperation = TableOperation.InsertOrReplace(dynamicTableEntity);
-                    try
-                    {
-                        _ourTable.Execute(insertOperation);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                    Console.WriteLine($"[{context.Lease.PartitionId}]  {sampleData.Client} - {sampleData.Location }: [{sampleData.MillId}] =  {sampleData.MegaWatt.ToString("0.00")} MW");
+                var dynamicTableEntity = new DynamicTableEntity(sampleData.Client, time);
+                dynamicTableEntity.Properties.Add("Location", new EntityProperty(sampleData.Location));
+                dynamicTableEntity.Properties.Add("MillId", new EntityProperty(sampleData.MillId));
+                dynamicTableEntity.Properties.Add("Megawatt", new EntityProperty(sampleData.MegaWatt));
+
+                var insertOperation = TableOperation.InsertOrReplace(dynamicTableEntity);
+                try
+                {
+                    _ourTable.Execute(insertOperation);
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                Console.WriteLine($"[{context.Lease.PartitionId}]  {sampleData.Client} - {sampleData.Location }: [{sampleData.MillId}] =  {sampleData.MegaWatt.ToString("0.00")} MW");
             }
             await context.CheckpointAsync();
         }
