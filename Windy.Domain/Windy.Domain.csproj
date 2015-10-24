@@ -74,6 +74,7 @@
     <Compile Include="Contracts\IWeatherCollector.cs" />
     <Compile Include="Entities\Generator.cs" />
     <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\WindSim\PowerForecastingProxy.cs" />
     <Compile Include="Entities\Yr\WeatherProxy.cs" />
     <Compile Include="Managers\WindyConfiguration.cs" />
     <Compile Include="Entities\Windmill.cs" />
