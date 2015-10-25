@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using Windy.Business.Managers;
 using Windy.Business.Yr;
-using Windy.Domain;
 using Windy.Domain.Entities;
 
 namespace Windy
