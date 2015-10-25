@@ -26,7 +26,7 @@ namespace Windy
             TransmitDataToEventHub(clients);
             StoreDataInTableStorage(clients);
 
-            Console.WriteLine($"Data transmitted and stored {DateTime.Now.ToString("dd MMM yyyy HH:mm")}");
+            Console.WriteLine($"Data transmitted and stored {DateTime.Now.ToString("dd MMM yyyy HH:mm")}");            
 
 //#if DEBUG
 //            Console.WriteLine("Press any key to stop...");
