@@ -71,11 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
-    <Compile Include="Contracts\IWeatherCollector.cs" />
+    <Compile Include="Contracts\WindSim\IPowerForecastingProxy.cs" />
+    <Compile Include="Contracts\Yr\IWeatherProxy.cs" />
     <Compile Include="Entities\Generator.cs" />
     <Compile Include="Entities\Location.cs" />
-    <Compile Include="Entities\WindSim\PowerForecastingProxy.cs" />
-    <Compile Include="Entities\Yr\WeatherProxy.cs" />
+    <Compile Include="Entities\WindSim\WindSimEntities.cs" />
+    <Compile Include="Entities\Yr\YrEntities.cs" />
     <Compile Include="Managers\WindyConfiguration.cs" />
     <Compile Include="Entities\Windmill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,6 +86,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

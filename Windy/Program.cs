@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Windy.Business.Yr;
 using Windy.Domain;
 using Windy.Domain.Entities;
-using Windy.Domain.Entities.Yr;
 using Windy.Domain.Managers;
 
 namespace Windy
@@ -121,14 +121,14 @@ namespace Windy
         private static List<Client> CreateAndPopulateClientsList()
         {
             var clients = ConstructClientsWithWindMills();
-
+            var weatherProxy = new WeatherProxy();
 
             foreach (var client in clients)
             {
                 foreach (var windmill in client.Windmills)
                 {
                     Console.WriteLine($"[{client.Name}] Retrieving weather: {windmill.Generator.Name} position: (lat={windmill.Location.Latitude.ToString("0.0000")}, lon={windmill.Location.Longitude.ToString("0.0000")})");
-                    var weatherData = WeatherProxy.GetWeatherDataForLocation(windmill.Location.Latitude, windmill.Location.Longitude);
+                    var weatherData = weatherProxy.GetWeatherDataForLocation(windmill.Location.Latitude, windmill.Location.Longitude);
                     var locationData = weatherData.product.time[0].location;
                     var windSpeed = locationData.windSpeed.mps;
                     var temperature = locationData.temperature.value;

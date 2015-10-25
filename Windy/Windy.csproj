@@ -120,6 +120,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Windy.Business\Windy.Business.csproj">
+      <Project>{f459bb4d-0378-403d-9b06-7dcf35314d1d}</Project>
+      <Name>Windy.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Windy.Domain\Windy.Domain.csproj">
       <Project>{2cead3b6-6296-4c14-921e-462322def654}</Project>
       <Name>Windy.Domain</Name>

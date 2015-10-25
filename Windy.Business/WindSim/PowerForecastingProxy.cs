@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using Windy.Domain.Contracts.WindSim;
+using Windy.Domain.Entities.WindSim;
 
-namespace Windy.Domain.Entities.WindSim
+namespace Windy.Business.WindSim
 {
-    public class PowerForecastingProxy
+    public class PowerForecastingProxy : IPowerForecastingProxy
     {
         /// <summary>
         /// Retrive Power Forecast Data fro WindSim API
         /// </summary>
         /// <param name="key">WindSim WindFarm Key</param>
         /// <returns>Power Forecast data for a specific WindFarm</returns>
-        public static PowerForecastData GetWindFarmData(string key)
+        public PowerForecastData GetWindFarmData(string key)
         {
-
             string requestUrl = $"https://windsimapi.azurewebsites.net/api/V1/Stream/{key}";
             using (var client = new WebClient())
             {
@@ -25,6 +24,7 @@ namespace Windy.Domain.Entities.WindSim
                 return ParseForecastingData(client.DownloadString(new Uri(requestUrl)));
             }
         }
+
 
         /// <summary>
         /// Parse an WindSim Power Forecast result into TimeSeries
@@ -61,51 +61,5 @@ namespace Windy.Domain.Entities.WindSim
             return result;
         }
 
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-        public partial class PowerForecastData
-        {
-            private Dictionary<string, Dictionary<DateTime, ForecastElementInfo>> _powerForecast = new Dictionary<string, Dictionary<DateTime, ForecastElementInfo>>();
-            public Dictionary<string, Dictionary<DateTime, ForecastElementInfo>> PowerForecast
-            {
-                get { return _powerForecast; }
-                set { _powerForecast = value; }
-            }
-        }
-
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
-        public partial class ForecastElementInfo
-        {
-            public ForecastElementType Type { get; private set; }
-
-            private string _name;
-            public string Name
-            {
-                get
-                {
-                    return _name;
-                }
-                set
-                {
-                    _name = value;
-                    Type = value == "ALL" ? ForecastElementType.WindFarm : ForecastElementType.Turbine;
-                }
-            }
-
-            public double PowerKW { get; set; }
-        }
-
-
-        /// <summary>
-        /// Represents the ElementType of Forecast
-        /// </summary>
-        public enum ForecastElementType
-        {
-            WindFarm = 0,
-            Turbine
-        }
     }
 }

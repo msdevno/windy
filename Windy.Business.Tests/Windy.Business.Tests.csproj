@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89773B24-9764-4C00-B9C1-76150BE16465}</ProjectGuid>
+    <ProjectGuid>{1E32A135-8573-4EDB-BBEE-C2E9775BBF44}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Windy.Domain.Tests</RootNamespace>
-    <AssemblyName>Windy.Domain.Tests</AssemblyName>
+    <RootNamespace>Windy.Business.Tests</RootNamespace>
+    <AssemblyName>Windy.Business.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,15 +55,20 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WindSim\PowerForecastProxyTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Windy.Business\Windy.Business.csproj">
+      <Project>{f459bb4d-0378-403d-9b06-7dcf35314d1d}</Project>
+      <Name>Windy.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Windy.Domain\Windy.Domain.csproj">
       <Project>{2cead3b6-6296-4c14-921e-462322def654}</Project>
       <Name>Windy.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
