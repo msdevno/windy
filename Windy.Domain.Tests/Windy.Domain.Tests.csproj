@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{695774BA-88D2-4537-984C-BBA373DBD47B}</ProjectGuid>
+    <ProjectGuid>{89773B24-9764-4C00-B9C1-76150BE16465}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Windy.Tests</RootNamespace>
-    <AssemblyName>Windy.Tests</AssemblyName>
+    <RootNamespace>Windy.Domain.Tests</RootNamespace>
+    <AssemblyName>Windy.Domain.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,7 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="PowerForecastProxyTest.cs" />
+    <Compile Include="Entities\WindSim\PowerForecastProxyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

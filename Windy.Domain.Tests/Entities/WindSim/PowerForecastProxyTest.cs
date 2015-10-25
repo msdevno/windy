@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Windy.Domain.Entities.WindSim;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using Windy.Domain.Entities.WindSim;
 
-namespace Windy.Tests
+namespace Windy.Domain.Test.Entities.WindSim
 {
     [TestClass]
     public class PowerForecastProxyTest
