@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Windy.Domain.Entities
 {
@@ -14,6 +13,8 @@ namespace Windy.Domain.Entities
 
         [DataMember(Name = "location", Order = 30)]
         public Location Location { get; set; }
+
+        [DataMember(Name = "lastsample", Order = 40)]
         public WindmillData LastSample { get; set; }
     }
 }
