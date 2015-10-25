@@ -20,6 +20,8 @@ namespace Windy.Domain.Test.Entities.WindSim
             Assert.IsNotNull(powerForecastingData.PowerForecast, "The parsed values is Null");
             Assert.AreEqual(powerForecastingData.PowerForecast.Keys.Count, 45);
 
+            Assert.IsTrue(powerForecastingData.PowerForecast.Keys.Any());
+
             var totalWindFarmPowerForecastTimeSeries = powerForecastingData.PowerForecast.FirstOrDefault(x => x.Value.Any(c => c.Value.Type == PowerForecastingProxy.ForecastElementType.WindFarm)).Value;
 
             var totalFirstTuebinePowerForecastTimeSeries = powerForecastingData.PowerForecast.FirstOrDefault(x => x.Value.Any(c => c.Value.Type == PowerForecastingProxy.ForecastElementType.Turbine)).Value;
