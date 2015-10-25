@@ -1,17 +1,20 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using Windy.Domain.Entities.WindSim;
+using Windy.Domain.Managers;
 
 namespace Windy.Domain.Test.Entities.WindSim
 {
     [TestClass]
     public class PowerForecastProxyTest
     {
+        WindyConfiguration _configuration = new WindyConfiguration();
+
         [TestMethod]
         public void RetriveData()
         {
 
-            var powerForecastingData=PowerForecastingProxy.GetWindFarmData("62c3ecac-5131-421e-b24d-4419ccd59264/22a0edef-ef56-4f10-960c-8d6540ef07a7");
+            var powerForecastingData=PowerForecastingProxy.GetWindFarmData(_configuration["WindSim_WindFarmKey01"]);
 
             Assert.IsNotNull(powerForecastingData,"The result is Null");
             Assert.IsNotNull(powerForecastingData.PowerForecast, "The parsed values is Null");
