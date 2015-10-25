@@ -32,6 +32,8 @@ namespace Windy.Domain.Entities.Yr
         public partial class weatherdata
         {
 
+
+
             private weatherdataModel[] metaField;
 
             private weatherdataProduct productField;
