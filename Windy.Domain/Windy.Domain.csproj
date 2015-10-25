@@ -77,7 +77,6 @@
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\WindSim\WindSimEntities.cs" />
     <Compile Include="Entities\Yr\YrEntities.cs" />
-    <Compile Include="Managers\WindyConfiguration.cs" />
     <Compile Include="Entities\Windmill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamAnalyticsFriendly.cs" />

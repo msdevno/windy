@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
 using System.Linq;
+using Windy.Business.Managers;
 using Windy.Business.WindSim;
 using Windy.Domain.Entities.WindSim;
-using Windy.Domain.Managers;
 
 namespace Windy.Business.Tests.WindSim
 {

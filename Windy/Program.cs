@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Windy.Business.Managers;
 using Windy.Business.Yr;
 using Windy.Domain;
 using Windy.Domain.Entities;
-using Windy.Domain.Managers;
 
 namespace Windy
 {
