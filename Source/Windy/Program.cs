@@ -4,10 +4,12 @@ using Microsoft.WindowsAzure.Storage.Table;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Windy.Business.Managers;
-using Windy.Business.Yr;
+using Windy.Data.Fakes;
+using Windy.Data.Yr;
+using Windy.Domain.Contracts;
+using Windy.Domain.Contracts.Yr;
 using Windy.Domain.Entities;
 
 namespace Windy
@@ -15,17 +17,22 @@ namespace Windy
     class Program
     {
         private static WindyConfiguration _configuration;
+        private static IClientRepository _clientRepository;
+        private static IWeatherProxy _weatherProxy;
 
         static void Main(string[] args)
         {
             _configuration = new WindyConfiguration();
+
+            _clientRepository = new FakeClientRepository();
+            _weatherProxy = new WeatherProxy();
 
             var clients = CreateAndPopulateClientsList();
 
             TransmitDataToEventHub(clients);
             StoreDataInTableStorage(clients);
 
-            Console.WriteLine($"Data transmitted and stored {DateTime.Now.ToString("dd MMM yyyy HH:mm")}");            
+            Console.WriteLine($"Data transmitted and stored {DateTime.Now.ToString("dd MMM yyyy HH:mm")}");
         }
 
 
@@ -39,9 +46,9 @@ namespace Windy
             var entityCount = 0;
             var batchOperation = new TableBatchOperation();
 
-            foreach(var client in clients)
+            foreach (var client in clients)
             {
-                foreach(var windmill in client.Windmills)
+                foreach (var windmill in client.Windmills)
                 {
                     var time = string.Format("{0:D19}", DateTime.MaxValue.Ticks - windmill.LastSample.SampleTime.Ticks);
                     var partitionKey = string.Format($"client.{client.Id}");
@@ -51,7 +58,7 @@ namespace Windy
                     dynamicTableEntity.Properties.Add("client_id", new EntityProperty(client.Id));
                     dynamicTableEntity.Properties.Add("client_name", new EntityProperty(client.Name));
 
-                    dynamicTableEntity.Properties.Add("windmill_id", new EntityProperty(windmill.Id));                    
+                    dynamicTableEntity.Properties.Add("windmill_id", new EntityProperty(windmill.Id));
 
                     dynamicTableEntity.Properties.Add("location_name", new EntityProperty(windmill.Location.Name));
                     dynamicTableEntity.Properties.Add("location_latitude", new EntityProperty(windmill.Location.Latitude));
@@ -79,12 +86,12 @@ namespace Windy
                 entityCount = 0;
             }
 
-            if(entityCount > 0)
+            if (entityCount > 0)
             {
                 Console.WriteLine(string.Format($"Wrote {entityCount} rows to Azure Table Storage."));
                 tableReference.ExecuteBatch(batchOperation);
             }
-}
+        }
 
         private static bool TransmitDataToEventHub(List<Client> clients)
         {
@@ -119,15 +126,15 @@ namespace Windy
 
         private static List<Client> CreateAndPopulateClientsList()
         {
-            var clients = ConstructClientsWithWindMills();
-            var weatherProxy = new WeatherProxy();
+            var clients = _clientRepository.GetAllClients();
+
 
             foreach (var client in clients)
             {
                 foreach (var windmill in client.Windmills)
                 {
                     Console.WriteLine($"[{client.Name}] Retrieving weather: {windmill.Generator.Name} position: (lat={windmill.Location.Latitude.ToString("0.0000")}, lon={windmill.Location.Longitude.ToString("0.0000")})");
-                    var weatherData = weatherProxy.GetWeatherDataForLocation(windmill.Location.Latitude, windmill.Location.Longitude);
+                    var weatherData = _weatherProxy.GetWeatherDataForLocation(windmill.Location.Latitude, windmill.Location.Longitude);
                     var locationData = weatherData.product.time[0].location;
                     var windSpeed = locationData.windSpeed.mps;
                     var temperature = locationData.temperature.value;

@@ -124,6 +124,14 @@
       <Project>{f459bb4d-0378-403d-9b06-7dcf35314d1d}</Project>
       <Name>Windy.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Windy.Data.Fakes\Windy.Data.Fakes.csproj">
+      <Project>{10f83429-fe3f-4e23-b198-f36cd6578b5b}</Project>
+      <Name>Windy.Data.Fakes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windy.Data.Yr\Windy.Data.Yr.csproj">
+      <Project>{280a1d57-6992-430e-8854-84809c77bc2a}</Project>
+      <Name>Windy.Data.Yr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Windy.Domain\Windy.Domain.csproj">
       <Project>{2cead3b6-6296-4c14-921e-462322def654}</Project>
       <Name>Windy.Domain</Name>
