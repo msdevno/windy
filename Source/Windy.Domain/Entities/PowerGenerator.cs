@@ -27,13 +27,7 @@ namespace Windy.Domain.Entities
         [DataMember(Name = "cutinspeed", Order = 70)]
         public double CutInSpeed { get; set; }
 
-        public double TangentMin
-        {
-            get
-            {
-                return (MaxOutputMw - MinOuputMw) / (MinOptimalWindspeed - CutInSpeed);
-            }
-        }       
+       
 
         public static IEnumerable<PowerGenerator> Generators
         {

@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Calculators\IMegaWattCalculator.cs" />
     <Compile Include="Contracts\IByteArrayConverter.cs" />
     <Compile Include="Contracts\IClientRepository.cs" />
     <Compile Include="Contracts\IDataWriter.cs" />

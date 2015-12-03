@@ -5,10 +5,12 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Windy.Business.Calculators;
 using Windy.Business.Managers;
 using Windy.Data.Fakes;
 using Windy.Data.Yr;
 using Windy.Domain.Contracts;
+using Windy.Domain.Contracts.Calculators;
 using Windy.Domain.Contracts.Yr;
 using Windy.Domain.Entities;
 
@@ -16,16 +18,17 @@ namespace Windy
 {
     class Program
     {
-        private static WindyConfiguration _configuration;
-        private static IClientRepository _clientRepository;
-        private static IWeatherProxy _weatherProxy;
+        private static WindyConfiguration  _configuration;
+        private static IClientRepository   _clientRepository;
+        private static IWeatherProxy       _weatherProxy;
+        private static IMegaWattCalculator _megawattCalculator;
 
         static void Main(string[] args)
         {
-            _configuration = new WindyConfiguration();
-
+            _configuration    = new WindyConfiguration();
             _clientRepository = new FakeClientRepository();
-            _weatherProxy = new WeatherProxy();
+            _weatherProxy     = new WeatherProxy();
+            _megawattCalculator = new MegaWattCalculator();
 
             var clients = CreateAndPopulateClientsList();
 
@@ -50,7 +53,7 @@ namespace Windy
             {
                 foreach (var windmill in client.Windmills)
                 {
-                    var time = string.Format("{0:D19}", DateTime.MaxValue.Ticks - windmill.LastSample.SampleTime.Ticks);
+                    var time = string.Format("{0:D19}", DateTime.MaxValue.Ticks - DateTime.Now.Ticks);
                     var partitionKey = string.Format($"client.{client.Id}");
                     var rowKey = string.Format($"windmill.{windmill.Id}.{time}");
                     var dynamicTableEntity = new DynamicTableEntity(partitionKey, rowKey);
@@ -70,12 +73,6 @@ namespace Windy
                     dynamicTableEntity.Properties.Add("generator_maxoutput", new EntityProperty(windmill.Generator.MaxOutputMw));
                     dynamicTableEntity.Properties.Add("generator_cutinspeed", new EntityProperty(windmill.Generator.CutInSpeed));
                     dynamicTableEntity.Properties.Add("generator_minoptimalwindspeed", new EntityProperty(windmill.Generator.MinOptimalWindspeed));
-
-
-                    dynamicTableEntity.Properties.Add("sample_time", new EntityProperty(windmill.LastSample.SampleTime));
-                    dynamicTableEntity.Properties.Add("sample_temperature", new EntityProperty(windmill.LastSample.Temperature));
-                    dynamicTableEntity.Properties.Add("sample_windspeed", new EntityProperty(windmill.LastSample.WindSpeed));
-                    dynamicTableEntity.Properties.Add("sample_megawatt", new EntityProperty(windmill.LastSample.MegaWatt));
 
                     batchOperation.Add(TableOperation.Insert(dynamicTableEntity));
                     entityCount++;
@@ -138,38 +135,12 @@ namespace Windy
                     var locationData = weatherData.product.time[0].location;
                     var windSpeed = locationData.windSpeed.mps;
                     var temperature = locationData.temperature.value;
-
-                    windmill.LastSample = new TemperatureSample
-                    {
-                        WindmillId = windmill.Id,
-                        WindSpeed = (double)windSpeed,
-                        Temperature = (double)temperature,
-                        SampleTime = DateTime.Now,
-                        MegaWatt = CalculateMegawattForGenerator(windmill.Generator, (double)windSpeed)
-                    };
                 }
             }
 
             return clients;
         }
 
-        private static double CalculateMegawattForGenerator(PowerGenerator generator, double windSpeed)
-        {
-            var megawatt = 0.0;
-
-            if (windSpeed < generator.CutInSpeed)
-                return 0.0;
-
-            if (windSpeed >= generator.MinOptimalWindspeed)
-                megawatt = generator.MaxOutputMw;
-
-            if (windSpeed < generator.MinOptimalWindspeed)
-            {
-                megawatt = (generator.TangentMin * (windSpeed - generator.CutInSpeed)) + generator.MinOuputMw;
-            }
-
-            return megawatt;
-        }
     }
 }
 
