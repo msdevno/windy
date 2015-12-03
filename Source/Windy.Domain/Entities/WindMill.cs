@@ -9,12 +9,9 @@ namespace Windy.Domain.Entities
         public int Id { get; set; }
 
         [DataMember(Name = "generator", Order = 20)]
-        public Generator Generator { get; set; }
+        public PowerGenerator Generator { get; set; }
 
         [DataMember(Name = "location", Order = 30)]
         public Location Location { get; set; }
-
-        [DataMember(Name = "lastsample", Order = 40)]
-        public WindmillData LastSample { get; set; }
     }
 }

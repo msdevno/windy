@@ -3,8 +3,8 @@ using System.Runtime.Serialization;
 
 namespace Windy.Domain.Entities
 {
-    [DataContract(Name = "generator")]
-    public class Generator
+    [DataContract(Name = "powergenerator")]
+    public class PowerGenerator
     {
         [DataMember(Name = "id", Order = 10)]
         public int Id { get; set; }
@@ -35,14 +35,14 @@ namespace Windy.Domain.Entities
             }
         }       
 
-        public static IEnumerable<Generator> Generators
+        public static IEnumerable<PowerGenerator> Generators
         {
             get
             {
-                yield return new Generator { Id = 4, Name = "Hitachi X800",  MaxOutputMw = 3.5, MinOuputMw = 0.15, MinOptimalWindspeed = 6.8, MaxOptimalWindspeed = 14.0, CutInSpeed = 2.0, };
-                yield return new Generator { Id = 1, Name = "Vestas V90",    MaxOutputMw = 2.0, MinOuputMw = 0.1,  MinOptimalWindspeed = 6.2, MaxOptimalWindspeed = 18.0, CutInSpeed = 3.5, };
-                yield return new Generator { Id = 2, Name = "Siemens SWT-6", MaxOutputMw = 5.0, MinOuputMw = 0.25, MinOptimalWindspeed = 7.0, MaxOptimalWindspeed = 14.0, CutInSpeed = 6.0, };
-                yield return new Generator { Id = 3, Name = "Enercon E126",  MaxOutputMw = 7.0, MinOuputMw = 0.3,  MinOptimalWindspeed = 8.2, MaxOptimalWindspeed = 18.0, CutInSpeed = 7.0, };
+                yield return new PowerGenerator { Id = 4, Name = "Hitachi X800",  MaxOutputMw = 3.5, MinOuputMw = 0.15, MinOptimalWindspeed = 6.8, MaxOptimalWindspeed = 14.0, CutInSpeed = 2.0, };
+                yield return new PowerGenerator { Id = 1, Name = "Vestas V90",    MaxOutputMw = 2.0, MinOuputMw = 0.1,  MinOptimalWindspeed = 6.2, MaxOptimalWindspeed = 18.0, CutInSpeed = 3.5, };
+                yield return new PowerGenerator { Id = 2, Name = "Siemens SWT-6", MaxOutputMw = 5.0, MinOuputMw = 0.25, MinOptimalWindspeed = 7.0, MaxOptimalWindspeed = 14.0, CutInSpeed = 6.0, };
+                yield return new PowerGenerator { Id = 3, Name = "Enercon E126",  MaxOutputMw = 7.0, MinOuputMw = 0.3,  MinOptimalWindspeed = 8.2, MaxOptimalWindspeed = 18.0, CutInSpeed = 7.0, };
             }
         }
     }

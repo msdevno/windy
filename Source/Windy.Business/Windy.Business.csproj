@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\ByteArrayConverter.cs" />
     <Compile Include="Managers\WindyConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindSim\PowerForecastingProxy.cs" />

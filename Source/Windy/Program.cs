@@ -36,7 +36,7 @@ namespace Windy
         }
 
 
-        private static void StoreDataInTableStorage(List<Client> clients)
+        private static void StoreDataInTableStorage(List<WindmillFarm> clients)
         {
             var storageConnectionString = _configuration["StorageConnectionString"];
             var storageClient = CloudStorageAccount.Parse(storageConnectionString);
@@ -93,7 +93,7 @@ namespace Windy
             }
         }
 
-        private static bool TransmitDataToEventHub(List<Client> clients)
+        private static bool TransmitDataToEventHub(List<WindmillFarm> clients)
         {
             var eventhubConnectionString = _configuration["EventHubSenderConnectionString"];
             if (string.IsNullOrEmpty(eventhubConnectionString))
@@ -124,7 +124,7 @@ namespace Windy
             return true;
         }
 
-        private static List<Client> CreateAndPopulateClientsList()
+        private static List<WindmillFarm> CreateAndPopulateClientsList()
         {
             var clients = _clientRepository.GetAllClients();
 
@@ -139,7 +139,7 @@ namespace Windy
                     var windSpeed = locationData.windSpeed.mps;
                     var temperature = locationData.temperature.value;
 
-                    windmill.LastSample = new WindmillData
+                    windmill.LastSample = new TemperatureSample
                     {
                         WindmillId = windmill.Id,
                         WindSpeed = (double)windSpeed,
@@ -153,7 +153,7 @@ namespace Windy
             return clients;
         }
 
-        private static double CalculateMegawattForGenerator(Generator generator, double windSpeed)
+        private static double CalculateMegawattForGenerator(PowerGenerator generator, double windSpeed)
         {
             var megawatt = 0.0;
 

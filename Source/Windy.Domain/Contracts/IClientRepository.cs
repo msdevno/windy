@@ -5,6 +5,6 @@ namespace Windy.Domain.Contracts
 {
     public interface IClientRepository 
     {
-        List<Client> GetAllClients();
+        List<WindmillFarm> GetAllClients();
     }
 }
