@@ -1,0 +1,9 @@
+{
+  "name": "Windy Web",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0"
+  }
+}

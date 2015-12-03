@@ -215,3 +215,9 @@ FakesAssemblies/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+
+# Web stuff
+**/node_modules
+**/bower_components
+Source/Dashboard/public
+*.map
