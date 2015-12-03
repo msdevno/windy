@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IClientRepository.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Contracts\WindSim\IPowerForecastingProxy.cs" />
     <Compile Include="Contracts\Yr\IWeatherProxy.cs" />

@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 using Windy.Domain.Contracts.Yr;
 using Windy.Domain.Entities.Yr;
 
-namespace Windy.Business.Yr
+namespace Windy.Data.Yr
 {
     public class WeatherProxy : IWeatherProxy
     {
@@ -28,3 +28,4 @@ namespace Windy.Business.Yr
         }
     }
 }
+
