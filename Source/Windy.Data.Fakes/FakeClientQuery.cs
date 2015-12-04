@@ -6,7 +6,7 @@ using Windy.Domain.Entities;
 
 namespace Windy.Data.Fakes
 {
-    public class FakeClientRepository : IClientRepository
+    public class FakeClientQuery : IClientQuery
     {
         public List<WindmillFarm> GetAllClients()
         {

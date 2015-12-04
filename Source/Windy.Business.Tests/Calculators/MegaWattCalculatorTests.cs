@@ -52,6 +52,7 @@ namespace Windy.Business.Tests.Calculators
             result.ShouldEqual(ValidPowerGenerator.MaxOutputMw);
         }
 
+
         private PowerGenerator ValidPowerGenerator { get { return PowerGenerator.Generators.First(); } }
 
         private double ValidWindSpeed { get { return 7.2; } }

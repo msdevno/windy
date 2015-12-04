@@ -19,14 +19,14 @@ namespace Windy
     class Program
     {
         private static WindyConfiguration  _configuration;
-        private static IClientRepository   _clientRepository;
+        private static IClientQuery   _clientRepository;
         private static IWeatherProxy       _weatherProxy;
         private static IMegaWattCalculator _megawattCalculator;
 
         static void Main(string[] args)
         {
             _configuration      = new WindyConfiguration();
-            _clientRepository   = new FakeClientRepository();
+            _clientRepository   = new FakeClientQuery();
             _weatherProxy       = new WeatherProxy();
             _megawattCalculator = new MegaWattCalculator();
 

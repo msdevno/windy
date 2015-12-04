@@ -3,7 +3,7 @@ using Windy.Domain.Entities;
 
 namespace Windy.Domain.Contracts
 {
-    public interface IClientRepository 
+    public interface IClientQuery 
     {
         List<WindmillFarm> GetAllClients();
     }

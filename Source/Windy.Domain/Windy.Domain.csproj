@@ -52,8 +52,8 @@
   <ItemGroup>
     <Compile Include="Contracts\Calculators\IMegaWattCalculator.cs" />
     <Compile Include="Contracts\Converters\IByteArrayConverter.cs" />
-    <Compile Include="Contracts\IClientRepository.cs" />
-    <Compile Include="Contracts\IDataWriter.cs" />
+    <Compile Include="Contracts\IClientQuery.cs" />
+    <Compile Include="Contracts\ISampleWriter.cs" />
     <Compile Include="Entities\WindmillFarm.cs" />
     <Compile Include="Contracts\WindSim\IPowerForecastingProxy.cs" />
     <Compile Include="Contracts\Yr\IWeatherProxy.cs" />
