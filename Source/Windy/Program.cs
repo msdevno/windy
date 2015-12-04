@@ -25,9 +25,9 @@ namespace Windy
 
         static void Main(string[] args)
         {
-            _configuration    = new WindyConfiguration();
-            _clientRepository = new FakeClientRepository();
-            _weatherProxy     = new WeatherProxy();
+            _configuration      = new WindyConfiguration();
+            _clientRepository   = new FakeClientRepository();
+            _weatherProxy       = new WeatherProxy();
             _megawattCalculator = new MegaWattCalculator();
 
             var clients = CreateAndPopulateClientsList();

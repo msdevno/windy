@@ -2,7 +2,7 @@
 
 namespace Windy.Domain.Contracts
 {
-    public interface IDataWriter<TEntity> where TEntity : class
+    public interface ISampleWriter<TEntity> where TEntity : class
     {
         Task Write(TEntity entity);
     }

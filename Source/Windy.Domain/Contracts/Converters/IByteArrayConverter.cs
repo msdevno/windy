@@ -1,4 +1,4 @@
-﻿namespace Windy.Domain.Contracts
+﻿namespace Windy.Domain.Contracts.Converters
 {
     public interface IByteArrayConverter<TEntity> where TEntity : class
     {

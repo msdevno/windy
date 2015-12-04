@@ -51,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\Calculators\IMegaWattCalculator.cs" />
-    <Compile Include="Contracts\IByteArrayConverter.cs" />
+    <Compile Include="Contracts\Converters\IByteArrayConverter.cs" />
     <Compile Include="Contracts\IClientRepository.cs" />
     <Compile Include="Contracts\IDataWriter.cs" />
     <Compile Include="Entities\WindmillFarm.cs" />

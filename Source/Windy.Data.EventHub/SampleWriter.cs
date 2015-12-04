@@ -1,20 +1,22 @@
 ﻿using Microsoft.ServiceBus.Messaging;
-using System;
 using System.Threading.Tasks;
 using Windy.Domain.Contracts;
+using Windy.Domain.Contracts.Converters;
 
 namespace Windy.Data.EventHub
 {
-    public class DataWriter<TEntity> : IDataWriter<TEntity> where TEntity : class
+    public class SampleWriter<TEntity> : ISampleWriter<TEntity> where TEntity : class
     {
         private readonly IByteArrayConverter<TEntity> _converter;
         private readonly EventHubClient _eventHubClient;
 
-        public DataWriter(IByteArrayConverter<TEntity> converter, string connectionString)
+
+        public SampleWriter(IByteArrayConverter<TEntity> converter, string connectionString)
         {
             _converter = converter;
             _eventHubClient = EventHubClient.CreateFromConnectionString(connectionString);
         }
+
 
         public async Task Write(TEntity entity)
         {
