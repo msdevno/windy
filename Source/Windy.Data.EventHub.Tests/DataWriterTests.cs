@@ -9,6 +9,5 @@ namespace Windy.Data.EventHub.Tests
     [TestClass]
     public class DataWriterTests : TestsFor<DataWriter<TemperatureSample>>
     {
-       
     }
 }

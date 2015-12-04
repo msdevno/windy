@@ -3,6 +3,7 @@ using Should;
 using System.Linq;
 using Windy.Business.Managers;
 using Windy.Business.WindSim;
+using Windy.CrossCutting.TestHelpers;
 using Windy.Domain.Entities.WindSim;
 
 namespace Windy.Business.Tests.WindSim
@@ -22,7 +23,7 @@ namespace Windy.Business.Tests.WindSim
             Instance        = new PowerForecastingProxy();
         }
 
-        [TestMethod, TestCategory("SLOW")]
+        [TestMethod, TestCategory(TestCategories.Slow)]
         public void GetWindFarmData_WhenCalled_ProducesActualResults()
         {         
              

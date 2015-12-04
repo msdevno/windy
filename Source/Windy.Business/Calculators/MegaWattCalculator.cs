@@ -9,8 +9,9 @@ namespace Windy.Business.Calculators
         {
             var megawatt = 0.0;
 
-            if (windSpeed < generator.CutInSpeed)
-                return 0.0;
+            if (generator == null || windSpeed < generator.CutInSpeed)
+                return megawatt; 
+
 
             if (windSpeed >= generator.MinOptimalWindspeed)
                 megawatt = generator.MaxOutputMw;
