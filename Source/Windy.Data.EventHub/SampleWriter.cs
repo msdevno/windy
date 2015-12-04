@@ -2,19 +2,21 @@
 using System.Threading.Tasks;
 using Windy.Domain.Contracts;
 using Windy.Domain.Contracts.Converters;
+using Windy.Domain.Contracts.Queries;
 
 namespace Windy.Data.EventHub
 {
     public class SampleWriter<TEntity> : ISampleWriter<TEntity> where TEntity : class
     {
+        private readonly IConfigReader                _configReader;
         private readonly IByteArrayConverter<TEntity> _converter;
-        private readonly EventHubClient _eventHubClient;
+        private readonly EventHubClient               _eventHubClient;
 
-
-        public SampleWriter(IByteArrayConverter<TEntity> converter, string connectionString)
+        public SampleWriter(IByteArrayConverter<TEntity> converter, IConfigReader configReader)
         {
-            _converter = converter;
-            _eventHubClient = EventHubClient.CreateFromConnectionString(connectionString);
+            _converter      = converter;
+            _configReader   = configReader;
+            _eventHubClient = EventHubClient.CreateFromConnectionString(_configReader["EventHubSenderConnectionString"], _configReader["eventHubName"]);
         }
 
 
@@ -22,6 +24,7 @@ namespace Windy.Data.EventHub
         {
             var byteArray = _converter.ConvertToBytes(entity);
             var eventData = new EventData(byteArray);
+
             await _eventHubClient.SendAsync(eventData);
         }
     }

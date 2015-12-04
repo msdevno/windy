@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Xml.Serialization;
+using Windy.Domain.Contracts;
 using Windy.Domain.Contracts.Yr;
 using Windy.Domain.Entities.Yr;
 
@@ -8,6 +9,13 @@ namespace Windy.Data.Yr
 {
     public class WeatherProxy : IWeatherProxy
     {
+        private readonly ILogger _logger;
+
+        public WeatherProxy(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public weatherdata GetWeatherDataForLocation(double latitude, double longitude)
         {
             var client = new WebClient();
@@ -17,7 +25,6 @@ namespace Windy.Data.Yr
                 var uri = string.Format($"http://api.yr.no/weatherapi/locationforecast/1.9/?lat={latitude};lon={longitude}");
                 var stream = client.OpenRead(new Uri(uri));
                 var serializer = new XmlSerializer(typeof(weatherdata));
-
                 return serializer.Deserialize(stream) as weatherdata;
             }
             catch (Exception e)

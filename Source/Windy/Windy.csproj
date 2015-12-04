@@ -106,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyInversion\RuntimeRegistry.cs" />
+    <Compile Include="DependencyInversion\SamplesTransmitterFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -132,6 +133,14 @@
     <ProjectReference Include="..\Windy.Business\Windy.Business.csproj">
       <Project>{f459bb4d-0378-403d-9b06-7dcf35314d1d}</Project>
       <Name>Windy.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windy.Data.Environment\Windy.Data.Environment.csproj">
+      <Project>{edd38213-7e11-4808-9f70-0eac50054c00}</Project>
+      <Name>Windy.Data.Environment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Windy.Data.EventHub\Windy.Data.EventHub.csproj">
+      <Project>{e87aca3b-5d95-41d0-88d4-d0f39dfc30ed}</Project>
+      <Name>Windy.Data.EventHub</Name>
     </ProjectReference>
     <ProjectReference Include="..\Windy.Data.Fakes\Windy.Data.Fakes.csproj">
       <Project>{10f83429-fe3f-4e23-b198-f36cd6578b5b}</Project>

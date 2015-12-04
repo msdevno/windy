@@ -12,7 +12,6 @@ namespace Windy.Data.Environment
 
         public ConfigReader()
         {
-            
             var userProfilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
             var configurationFile = Path.Combine(userProfilePath, "Windy.config");
 
@@ -31,7 +30,15 @@ namespace Windy.Data.Environment
             else
             {
                 var fileMap = new ExeConfigurationFileMap { ExeConfigFilename = configurationFile };
-                _config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+                try
+                {
+                    _config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+
+                }
+                catch
+                {
+                    throw;
+                }
             }
         }
 

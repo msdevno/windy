@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="Contracts\Calculators\IMegaWattCalculator.cs" />
     <Compile Include="Contracts\Converters\IByteArrayConverter.cs" />
+    <Compile Include="Contracts\Factories\ISamplesTransmitterFactory.cs" />
+    <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="Contracts\Queries\IWindmillFarmsQuery.cs" />
     <Compile Include="Contracts\ISampleWriter.cs" />
     <Compile Include="Contracts\Managers\IWindPowerManager.cs" />

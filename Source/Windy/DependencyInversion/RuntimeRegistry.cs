@@ -1,5 +1,7 @@
 ﻿using StructureMap;
 using Windy.Data.Fakes;
+using Windy.Domain.Contracts;
+using Windy.Domain.Contracts.Factories;
 using Windy.Domain.Contracts.Queries;
 
 namespace Windy.DependencyInversion
@@ -11,6 +13,7 @@ namespace Windy.DependencyInversion
             Scan(x =>
             {
                 // Data Layer
+                x.Assembly("Windy.Data.Environment");
                 x.Assembly("Windy.Data.EventHub");
                 x.Assembly("Windy.Data.Fakes");
                 x.Assembly("Windy.Data.Yr");
@@ -19,14 +22,17 @@ namespace Windy.DependencyInversion
                 x.Assembly("Windy.Domain");
 
                 // Business Layer
-                x.Assembly("Windy.Business");
-
+                x.Assembly("Windy.Business");               
 
                 x.WithDefaultConventions();
-            });
+            });            
 
             // Outside of all standard conversions
             For<IWindmillFarmsQuery>().Use<FakeWindmillFarmsQuery>();
+            For<ILogger>().Use<FakeLogger>();
+
+            // Singletons
+            For<ISamplesTransmitterFactory>().Singleton().Use<SamplesTransmitterFactory>();
         }
     }
 }
