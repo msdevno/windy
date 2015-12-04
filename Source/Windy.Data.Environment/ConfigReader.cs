@@ -1,25 +1,26 @@
-﻿using System;
+﻿using Windy.Domain.Contracts.Queries;
 using System.Configuration;
 using System.IO;
+using System;
 
-namespace Windy.Business.Managers
+namespace Windy.Data.Environment
 {
-    public class WindyConfiguration
+    public class ConfigReader : IConfigReader
     {
         private bool _isInAzure;
         private Configuration _config;
 
-        public WindyConfiguration()
+        public ConfigReader()
         {
-            var userProfilePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            
+            var userProfilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
             var configurationFile = Path.Combine(userProfilePath, "Windy.config");
 
             if (!File.Exists(configurationFile))
             {
-                var azureRegionName = Environment.GetEnvironmentVariable("REGION_NAME");
-                if(!string.IsNullOrEmpty(azureRegionName))
+                var azureRegionName = System.Environment.GetEnvironmentVariable("REGION_NAME");
+                if (!string.IsNullOrEmpty(azureRegionName))
                 {
-                    Console.WriteLine($"App is running in Azure region: {azureRegionName}");
                     _isInAzure = true;
                 }
                 else
@@ -29,21 +30,19 @@ namespace Windy.Business.Managers
             }
             else
             {
-                Console.WriteLine("App is running on local developer machine");
                 var fileMap = new ExeConfigurationFileMap { ExeConfigFilename = configurationFile };
                 _config = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
             }
         }
 
-
         public string this[string settingName]
         {
             get
             {
-                if(_isInAzure)
+                if (_isInAzure)
                 {
                     var azureSetting = string.Format($"APPSETTING_{settingName}");
-                    return Environment.GetEnvironmentVariable(azureSetting);
+                    return System.Environment.GetEnvironmentVariable(azureSetting);
                 }
 
                 return _config.AppSettings.Settings[settingName].Value;

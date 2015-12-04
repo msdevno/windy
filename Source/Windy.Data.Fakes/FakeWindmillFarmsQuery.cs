@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Windy.Domain.Contracts;
+using Windy.Domain.Contracts.Queries;
 using Windy.Domain.Entities;
 
 namespace Windy.Data.Fakes
 {
-    public class FakeClientQuery : IClientQuery
+    public class FakeWindmillFarmsQuery : IWindmillFarmsQuery
     {
-        public List<WindmillFarm> GetAllClients()
+        public List<WindmillFarm> GetAll()
         {
             var millId = 1;
             var generators = PowerGenerator.Generators.ToArray();

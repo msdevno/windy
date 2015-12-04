@@ -3,7 +3,7 @@ using Should;
 using System;
 using Windy.Business.Converters;
 using Windy.CrossCutting.TestHelpers;
-using Windy.Domain.Entities.Samples.Samples;
+using Windy.Domain.Entities.Samples;
 
 namespace Windy.Business.Tests.Converters
 {

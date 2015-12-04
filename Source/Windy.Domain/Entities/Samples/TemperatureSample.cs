@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Windy.Domain.Entities.Samples.Samples
+namespace Windy.Domain.Entities.Samples
 {
     [Serializable, DataContract(Name ="windmilldata")]
     public class TemperatureSample : WindmillSample

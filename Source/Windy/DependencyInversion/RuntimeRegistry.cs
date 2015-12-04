@@ -1,11 +1,6 @@
 ﻿using StructureMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windy.Data.Fakes;
-using Windy.Domain.Contracts;
+using Windy.Domain.Contracts.Queries;
 
 namespace Windy.DependencyInversion
 {
@@ -31,7 +26,7 @@ namespace Windy.DependencyInversion
             });
 
             // Outside of all standard conversions
-            For<IClientQuery>().Use<FakeClientQuery>();
+            For<IWindmillFarmsQuery>().Use<FakeWindmillFarmsQuery>();
         }
     }
 }
