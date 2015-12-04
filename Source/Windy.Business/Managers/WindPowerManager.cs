@@ -25,21 +25,30 @@ namespace Windy.Business.Managers
         {
             var allFarms = _windmillFarmsQuery.GetAll();
 
-            var samples = new List<WindmillSample>();
+            var samples = GatherSampleData(allFarms);
 
-            foreach(var farm in allFarms)
-                foreach(var mill in farm.Windmills)
+
+
+        }
+
+        private IEnumerable<WindmillSample> GatherSampleData(List<Domain.Entities.WindmillFarm> allFarms)
+        {
+            var samples = new List< WindmillSample >();
+            foreach (var farm in allFarms)
+                foreach (var mill in farm.Windmills)
                 {
                     var weatherData = _weatherProxy.GetWeatherDataForLocation(mill.Location.Latitude, mill.Location.Longitude);
                     var locationData = weatherData.product.time[0].location;
 
                     var windSpeed = (double)locationData.windSpeed.mps;
-                    samples.Add(new WindSpeedSample{ WindmillId = mill.Id, SampleTime = DateTime.Now, WindSpeed = windSpeed });
-                    samples.Add(new TemperatureSample{ WindmillId = mill.Id, SampleTime = DateTime.Now, Temperature = (double) locationData.temperature.value });
+                    samples.Add(new WindSpeedSample { WindmillId = mill.Id, SampleTime = DateTime.Now, WindSpeed = windSpeed });
+                    samples.Add(new TemperatureSample { WindmillId = mill.Id, SampleTime = DateTime.Now, Temperature = (double)locationData.temperature.value });
 
                     var megawatt = _megawattCalculator.CalculateForGeneratorBasedOnWindSpeed(mill.Generator, windSpeed);
                     samples.Add(new MegawattSample { WindmillId = mill.Id, SampleTime = DateTime.Now, MegaWatt = megawatt });
                 }
+
+            return samples;
         }
     }
 }
