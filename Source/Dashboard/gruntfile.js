@@ -6,6 +6,7 @@ module.exports = function (grunt) {
         "bower_components/**/*.js",
         "Scripts/**/*.js",
         "bin/**/*.js",
+        "wallaby.js",
         "gruntfile.js"
     ];
 
@@ -16,6 +17,7 @@ module.exports = function (grunt) {
         "!bower_components/**/*.js",
         "!Scripts/**/*.js",
         "!bin/**/*.js",
+        "!wallaby.js",
         "!gruntfile.js"
     ];
     
@@ -186,5 +188,9 @@ module.exports = function (grunt) {
 
     // DEBUG=express:* node app
 
+
     grunt.registerTask("default", ["exec", "less", "copy", "staticBabel"]);
+    
+    
+    
 };

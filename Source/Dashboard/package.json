@@ -13,6 +13,7 @@
     "grunt-contrib-less": "^1.0.1",
     "grunt-exec": "^0.4.6",
     "grunt-shell": "^1.1.2",
+    "jasmine-core": "^2.4.1",
     "jshint": "^2.8.0",
     "jspm": "^0.16.14"
   },
