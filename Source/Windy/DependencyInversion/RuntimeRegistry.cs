@@ -25,11 +25,12 @@ namespace Windy.DependencyInversion
                 x.Assembly("Windy.Business");               
 
                 x.WithDefaultConventions();
-            });            
+            });
 
-            // Outside of all standard conversions
+            // Fakes
+            For<ISampleGatherer>(    ).Use<FakeSampleGatherer>();
             For<IWindmillFarmsQuery>().Use<FakeWindmillFarmsQuery>();
-            For<ILogger>().Use<FakeLogger>();
+            For<ILogger>(            ).Use<FakeLogger>();
 
             // Singletons
             For<ISamplesTransmitterFactory>().Singleton().Use<SamplesTransmitterFactory>();

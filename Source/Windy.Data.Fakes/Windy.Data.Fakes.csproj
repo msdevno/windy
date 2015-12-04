@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FakeLogger.cs" />
+    <Compile Include="FakeSampleGatherer.cs" />
     <Compile Include="FakeWindmillFarmsQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

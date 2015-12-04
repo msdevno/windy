@@ -7,7 +7,7 @@ namespace Windy.Data.Fakes
 {
     public class FakeWindmillFarmsQuery : IWindmillFarmsQuery
     {
-        public List<WindmillFarm> GetAll()
+        public IEnumerable<WindmillFarm> GetAll()
         {
             var millId = 1;
             var generators = PowerGenerator.Generators.ToArray();

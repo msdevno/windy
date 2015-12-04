@@ -5,6 +5,6 @@ namespace Windy.Domain.Contracts.Queries
 {
     public interface IWindmillFarmsQuery 
     {
-        List<WindmillFarm> GetAll();
+        IEnumerable<WindmillFarm> GetAll();
     }
 }
