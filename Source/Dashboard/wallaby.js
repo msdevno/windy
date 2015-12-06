@@ -3,20 +3,23 @@ var babel = require('babel');
 module.exports = function (wallaby) {
     return {
         
-        //debug: true, // Enable this to get debugging info in the console
+        debug: true, // Enable this to get debugging info in the console
         testFramework: "jasmine@2.1.3",
         files: [
-            { pattern: 'public/jspm_packages/system.js', instrument: false },
+            { pattern: 'jspm_packages/system.js', instrument: false },
             
             { pattern: 'config.js', instrument: false },
             { pattern: 'build.js', instrument: false, load: false },
 
             { pattern: 'sinon-1.15.0.js', instrument: false },
-
-            '!Specs/**/*.js',
-            '!node_modules/**/.js',
-            '!bower_components/**/.js',
-            '!public/**/.js'
+            { pattern: "**/*.js", load: false }, 
+            
+            "!Specs/**/*.js",
+            "!node_modules/**/*.js",
+            "!jspm_packages/github/**/*.js",
+            "!jspm_packages/npm/**/*.js",
+            "!bower_components/**/*.js",
+            "!public/**/*.js"
         ],
         tests: [
             { pattern: 'Specs/**/*.js', load: false }
@@ -33,9 +36,9 @@ module.exports = function (wallaby) {
 
         
         middleware: (app, express) => {
-            app.use('/public/jspm_packages',
+            app.use('/jspm_packages',
                     express.static(
-                        require('path').join(__dirname, 'public/jspm_packages')));
+                        require('path').join(__dirname, 'jspm_packages')));
         },
 
         bootstrap: function (wallaby) {

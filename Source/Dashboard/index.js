@@ -14,4 +14,8 @@ export class index
 			self.stuff(self.stuff()+6);
 		}, 1000);	
 	}
+	
+	doStuff() {
+		return false;
+	}
 }

@@ -4,6 +4,7 @@ module.exports = function (grunt) {
         "public/**/*.js",
         "node_modules/**/*.js",
         "bower_components/**/*.js",
+        "jspm_packages/**/*.js",
         "Scripts/**/*.js",
         "bin/**/*.js",
         "wallaby.js",
@@ -15,6 +16,7 @@ module.exports = function (grunt) {
         "!public/**/*.js",
         "!node_modules/**/*.js",
         "!bower_components/**/*.js",
+        "!jspm_packages/**/*.js",
         "!Scripts/**/*.js",
         "!bin/**/*.js",
         "!wallaby.js",
@@ -29,6 +31,7 @@ module.exports = function (grunt) {
         "styles/**/*.*",
         "images/**/*.*",
         "bower_components/**/*.*",
+        "jspm_packages/**/*.*",
         "!public/**/*.html"
     ];
 
