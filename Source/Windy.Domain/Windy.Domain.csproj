@@ -54,6 +54,7 @@
     <Compile Include="Contracts\Converters\IByteArrayConverter.cs" />
     <Compile Include="Contracts\Factories\ISamplesTransmitterFactory.cs" />
     <Compile Include="Contracts\ILogger.cs" />
+    <Compile Include="Contracts\Managers\IExceptionManager.cs" />
     <Compile Include="Contracts\Queries\ISampleGatherer.cs" />
     <Compile Include="Contracts\Queries\IWindmillFarmsQuery.cs" />
     <Compile Include="Contracts\ISampleWriter.cs" />
