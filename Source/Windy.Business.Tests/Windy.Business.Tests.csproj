@@ -43,6 +43,8 @@
       <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StructureMap, Version=4.0.0.315, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="StructureMap.AutoMocking.Moq, Version=4.0.0.315, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
   </ItemGroup>
   <Choose>

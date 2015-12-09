@@ -9,12 +9,19 @@ using System.Collections.Generic;
 using Windy.Domain.Contracts.Factories;
 using Windy.Domain.Entities.Samples;
 using System.Linq;
+using StructureMap.AutoMocking.Moq;
+using Windy.Domain.Contracts.Managers;
 
 namespace Windy.Business.Tests.Managers
 {
     [TestClass]
     public class WindPowerManagerTests : TestsFor<WindPowerManager>
     {
+        public override void Before_Each_UnitTest()
+        {
+            AutoMocker.Container.Configure(o => o.For<IExceptionManager>().Use<ExceptionManager>());
+        }
+
         [TestMethod]
         public void Start_WhenCalled_LoadsWindmillFarmsUsingTheRightQuery()
         {
