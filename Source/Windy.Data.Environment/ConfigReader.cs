@@ -7,12 +7,13 @@ namespace Windy.Data.Environment
 {
     public class ConfigReader : IConfigReader
     {
-        private bool _isInAzure;
+        private bool          _isInAzure;
         private Configuration _config;
+
 
         public ConfigReader()
         {
-            var userProfilePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
+            var userProfilePath   = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile);
             var configurationFile = Path.Combine(userProfilePath, "Windy.config");
 
             if (!File.Exists(configurationFile))
@@ -41,6 +42,7 @@ namespace Windy.Data.Environment
                 }
             }
         }
+
 
         public string this[string settingName]
         {

@@ -11,11 +11,13 @@ namespace Windy.DependencyInversion
         private readonly IConfigReader _configReader;
         private Dictionary<string, object> _writers;
 
+
         public SamplesTransmitterFactory(IConfigReader configReader)
         {
             _writers      = new Dictionary<string, object>();
             _configReader = configReader;
         }
+
 
         public async void Transmit<TSampleType>(TSampleType sample) where TSampleType : class
         {
@@ -23,6 +25,7 @@ namespace Windy.DependencyInversion
 
             await writer.Write(sample);            
         }
+
 
         private SampleWriter<TSampleType> GetOrCreateWriter<TSampleType>(TSampleType sample) where TSampleType : class
         {
